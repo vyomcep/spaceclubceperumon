@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;600&display=swap" rel="stylesheet">
     
     <style>
-        /* --- CSS VARIABLES & RESET --- */
+        /* --- CSS VARIABLES --- */
         :root {
             --space-black: #050505;
             --deep-blue: #0b0d17;
@@ -18,105 +18,75 @@
             --text-gray: #d0d6f9;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth; /* Enables smooth sliding when clicking nav links */
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Exo 2', sans-serif;
             background-color: var(--space-black);
             color: var(--text-white);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* --- HEADER --- */
+        /* --- HEADER (Glassmorphism) --- */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem 5%;
-            background-color: rgba(11, 13, 23, 0.95);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(56, 182, 255, 0.2);
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
         }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+        .logo-container { display: flex; align-items: center; gap: 15px; }
+        .club-logo { height: 60px; border-radius: 50%; }
+        .college-logo { height: 50px; background: white; padding: 2px; border-radius: 4px; }
 
-        .club-logo {
-            height: 60px;
-            border-radius: 50%;
-        }
-
-        .college-logo {
-            height: 50px;
-            background: white;
-            padding: 2px;
-            border-radius: 4px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-        }
-
+        nav ul { list-style: none; display: flex; gap: 30px; }
         nav a {
             color: var(--text-white);
             text-decoration: none;
             font-family: 'Orbitron', sans-serif;
             font-size: 0.9rem;
             letter-spacing: 1px;
-            transition: color 0.3s;
+            transition: 0.3s;
         }
+        nav a:hover { color: var(--accent-blue); }
 
-        nav a:hover {
-            color: var(--accent-blue);
-        }
-
-        /* --- HERO SECTION --- */
+        /* --- HERO (Animated Nebula) --- */
         .hero {
-            height: 80vh;
+            height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+            background: linear-gradient(-45deg, #050505, #0b0d17, #1b2735, #050505);
+            background-size: 400% 400%;
+            animation: nebula 15s ease infinite;
             padding: 20px;
             position: relative;
-            overflow: hidden;
         }
 
-        .hero::before {
-            content: "";
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            box-shadow: 10vw 10vh 2px white, 20vw 40vh 1px white, 50vw 10vh 2px white, 80vw 80vh 1px white, 10vw 90vh 2px white;
-            opacity: 0.5;
+        @keyframes nebula {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 8vw, 4rem);
             margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(56, 182, 255, 0.5);
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(56, 182, 255, 0.6);
         }
 
         .hero p {
@@ -127,161 +97,69 @@
         }
 
         .btn {
-            padding: 12px 30px;
+            padding: 12px 35px;
             background-color: var(--accent-blue);
             color: var(--deep-blue);
             text-decoration: none;
             font-weight: bold;
             font-family: 'Orbitron', sans-serif;
             border-radius: 30px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(56, 182, 255, 0.3);
         }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 0 25px var(--accent-blue); }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 20px rgba(56, 182, 255, 0.6);
-        }
-
-        /* --- ABOUT SECTION --- */
-        .about {
-            padding: 80px 10%;
-            background-color: var(--deep-blue);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 50px;
-        }
-
-        .about-content {
-            flex: 2;
-        }
-
-        .about-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-
-        .about-image img {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
+        /* --- SECTION GENERIC --- */
         .section-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
             color: var(--accent-blue);
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -5px;
-            width: 50%;
-            height: 3px;
-            background-color: white;
-        }
-
-        .about-text {
-            color: var(--text-gray);
-            font-size: 1.1rem;
-            text-align: justify;
-        }
-
-        /* --- CONTACT SECTION --- */
-        .contact {
-            padding: 80px 10%;
-            background-color: var(--space-black);
+            margin-bottom: 30px;
             text-align: center;
-            border-top: 1px solid rgba(56, 182, 255, 0.1);
         }
 
-        .contact-details {
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
+        /* --- PILLARS SECTION --- */
+        .pillars { padding: 80px 10%; background: var(--space-black); }
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
-
-        .email-link {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: var(--accent-blue);
-            text-decoration: none;
+        .pillar-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(56, 182, 255, 0.1);
+            text-align: center;
             transition: 0.3s;
         }
+        .pillar-card:hover { border-color: var(--accent-blue); transform: translateY(-5px); }
+        .pillar-card h3 { font-family: 'Orbitron'; margin-bottom: 15px; color: var(--accent-blue); }
 
-        .email-link:hover {
-            text-shadow: 0 0 10px var(--accent-blue);
-        }
+        /* --- ABOUT --- */
+        .about { padding: 80px 10%; background-color: var(--deep-blue); display: flex; flex-wrap: wrap; align-items: center; gap: 50px; }
+        .about-content { flex: 2; }
+        .about-image { flex: 1; display: flex; justify-content: center; }
+        .about-image img { max-width: 100%; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); }
 
-        .social-links {
-            display: flex;
-            gap: 25px;
-            margin-top: 10px;
-        }
+        /* --- CONTACT --- */
+        .contact { padding: 80px 10%; text-align: center; border-top: 1px solid rgba(56, 182, 255, 0.1); }
+        .email-link { font-family: 'Orbitron'; font-size: 1.5rem; color: var(--accent-blue); text-decoration: none; transition: 0.3s; }
+        .email-link:hover { text-shadow: 0 0 10px var(--accent-blue); }
+        .social-links { display: flex; justify-content: center; gap: 25px; margin-top: 20px; }
+        .social-icon { color: var(--text-white); border: 1px solid rgba(255,255,255,0.1); padding: 10px; border-radius: 50%; transition: 0.3s; }
+        .social-icon:hover { color: var(--accent-blue); border-color: var(--accent-blue); transform: translateY(-5px); }
 
-        .social-icon {
-            color: var(--text-white);
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
+        footer { background: #000; padding: 40px; text-align: center; color: #666; font-size: 0.9rem; }
 
-        .social-icon:hover {
-            color: var(--accent-blue);
-            border-color: var(--accent-blue);
-            transform: translateY(-5px);
-            box-shadow: 0 0 15px rgba(56, 182, 255, 0.3);
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background-color: black;
-            padding: 40px 5%;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        footer p {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* --- MOBILE RESPONSIVENESS --- */
+        /* --- MOBILE REPAIRS --- */
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            nav ul {
-                gap: 15px;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .email-link {
-                font-size: 1.1rem;
-            }
-
-            .about {
-                flex-direction: column;
-                padding: 40px 5%;
-            }
+            header { padding: 10px 5%; }
+            .club-logo { height: 45px; }
+            .college-logo { height: 35px; }
+            nav ul { gap: 15px; }
+            nav a { font-size: 0.7rem; }
+            .about { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -289,70 +167,79 @@
 
     <header>
         <div class="logo-container">
-            <img src="vyom.jpeg" alt="Vyom Space Club Logo" class="club-logo">
-            <span style="font-family: 'Orbitron'; font-weight: bold; font-size: 1.2rem;">VYOM</span>
+            <img src="vyom.jpeg" alt="Vyom" class="club-logo">
+            <span style="font-family: 'Orbitron'; font-weight: bold;">VYOM</span>
         </div>
-
         <nav>
             <ul>
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#">Events</a></li>
+                <li><a href="#pillars">Mission</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
-
         <div class="logo-container">
-            <img src="Logo_for_College_of_Engineering_Perumon.jpg" alt="College of Engineering Perumon Logo" class="college-logo">
+            <img src="Logo_for_College_of_Engineering_Perumon.jpg" alt="CEP" class="college-logo">
         </div>
     </header>
 
     <section id="hero" class="hero">
         <h1>Vyom Space Club</h1>
         <p>College of Engineering Perumon</p>
-        <p style="font-size: 1rem; margin-top: -15px; color: #aaa;">Exploring the Infinite</p>
+        <p style="font-size: 1rem; margin-top: -15px; color: var(--accent-blue); font-family: 'Orbitron';">Exploring the Infinite</p>
         <a href="#about" class="btn">Start Exploring</a>
     </section>
 
     <section id="about" class="about">
         <div class="about-content">
-            <h2 class="section-title">About Us</h2>
-            <div class="about-text">
-                <p>
-                    Founded on April 7, 2023, <strong>Vyom Space Club</strong> is the premier student-led aerospace and astronomy organization at the <strong>College of Engineering Perumon</strong>. 
-                    <br><br>
-                    Our club serves as a collaborative platform for students across all engineering disciplines to explore the complexities of space science. By integrating technical workshops, research initiatives, and observational sessions, Vyom aims to cultivate a culture of aerospace innovation within the CEP campus. 
-                    <br><br>
-                    We are committed to empowering our members with the skills required to contribute to the future of space exploration.
-                </p>
-            </div>
+            <h2 class="section-title" style="text-align: left;">About Us</h2>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">
+                Founded on April 7, 2023, <strong>Vyom Space Club</strong> is the premier student-led aerospace and astronomy organization at the <strong>College of Engineering Perumon</strong>. 
+            </p>
+            <p style="color: var(--text-gray);">
+                Our club serves as a collaborative platform for students across all engineering disciplines to explore space science through technical workshops, research initiatives, and observational sessions.
+            </p>
         </div>
         <div class="about-image">
-            <img src="vyom.jpeg" alt="Vyom Space Club Feature">
+            <img src="vyom.jpeg" alt="Vyom Space Club">
+        </div>
+    </section>
+
+    <section id="pillars" class="pillars">
+        <h2 class="section-title">Our Pillars</h2>
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <h3>Astronomy</h3>
+                <p style="color: var(--text-gray);">Observation sessions and stargazing events using campus equipment.</p>
+            </div>
+            <div class="pillar-card">
+                <h3>Aerospace</h3>
+                <p style="color: var(--text-gray);">Workshops on rocketry, satellite design, and propulsion systems.</p>
+            </div>
+            <div class="pillar-card">
+                <h3>Research</h3>
+                <p style="color: var(--text-gray);">Collaborative technical projects and student-led paper publications.</p>
+            </div>
         </div>
     </section>
 
     <section id="contact" class="contact">
         <h2 class="section-title">Mission Control</h2>
-        <div class="contact-details">
-            <p style="color: var(--text-gray);">For inquiries and collaborations:</p>
-            <a href="mailto:vyomcep@gmail.com" class="email-link">vyomcep@gmail.com</a>
-            
-            <div class="social-links">
-                <a href="https://www.instagram.com/vyom_cep/" target="_blank" class="social-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                </a>
-                
-                <a href="https://www.linkedin.com/company/vyom-space-club-cep/" target="_blank" class="social-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                </a>
-            </div>
+        <p style="color: var(--text-gray); margin-bottom: 15px;">For inquiries and collaborations:</p>
+        <a href="mailto:vyomcep@gmail.com" class="email-link">vyomcep@gmail.com</a>
+        <div class="social-links">
+            <a href="https://www.instagram.com/vyom_cep/" target="_blank" class="social-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/vyom-space-club-cep/" target="_blank" class="social-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
         </div>
     </section>
 
     <footer>
         <p>&copy; 2026 Vyom Space Club. All Rights Reserved.</p>
-        <p>College of Engineering Perumon, Kerala</p>
+        <p>College of Engineering Perumon, Kollam, Kerala</p>
     </footer>
 
 </body>
